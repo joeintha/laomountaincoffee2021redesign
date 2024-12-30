@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CommonNinja Widget</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+        .commonninja_component {
+            width: 100%;
+            height: 100%;
+        }
+        .commonninja-ribbon {
+            display: none !important;
+        }
+    </style>
+    <script src="https://cdn.commoninja.com/sdk/latest/commonninja.js" defer></script>
+</head>
+<body>
+    <div class="commonninja_component pid-05f09bc6-536d-4d71-be3e-1baea2f18555"></div>
+
+    <script>
+        // Options for the observer (which mutations to observe)
+        const config = { attributes: false, childList: true, subtree: true };
+
+        // Callback function to execute when mutations are observed
+        const callback = function(mutationsList, observer) {
+            for (let mutation of mutationsList) {
+                if (mutation.type === 'childList') {
+                    let ribbons = document.querySelectorAll('.commonninja-ribbon');
+                    ribbons.forEach(ribbon => {
+                        ribbon.style.display = 'none';
+                    });
+                }
+            }
+        };
+
+        // Create an observer instance linked to the callback function
+        const observer = new MutationObserver(callback);
+
+        // Start observing the target node for configured mutations
+        observer.observe(document.body, config);
+    </script>
+</body>
+</html>
